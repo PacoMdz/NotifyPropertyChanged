@@ -67,6 +67,14 @@ namespace Mx.Models.NotifyProperties
         /// Notify all subscribers that property value of the given name has changed.
         /// </summary>
         /// <param name="propertyName"> Name of the changed property</param>
+        protected void TriggerPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        /// <summary>
+        /// Notify all subscribers that property value of the given name has changed.
+        /// </summary>
+        /// <param name="propertyName"> Name of the changed property</param>
         protected void RaisePropertyChanged([CallerMemberName] string propertyName = "")
         {
             if (string.IsNullOrWhiteSpace(propertyName))
@@ -75,7 +83,7 @@ namespace Mx.Models.NotifyProperties
             if (!PropertyExists(propertyName))
                 throw new MissingMemberException("NotifyPropertyChanged", propertyName);
 
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            TriggerPropertyChanged(propertyName);
         }
         /// <summary>
         /// Notify all subscribers that properties of the given names have changed, 
