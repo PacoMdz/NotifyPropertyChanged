@@ -8,7 +8,7 @@ Markup property
 * **mc:Ignorable**="d"
 
 DataContext Binding
-* **d:DataContext**="{d:DesignInstance **Type**=viewmodel:CustomViewModel, **IsDesignTimeCreatable**=True}"
+* **d:DataContext**="{d:DesignInstance **Type**={x:Type viewmodel:CustomViewModel}, **IsDesignTimeCreatable**=True}"
 
 ### XAML Example
 
@@ -23,7 +23,7 @@ DataContext Binding
     mc:Ignorable="d"
         
     xmlns:viewmodel="clr-namespace:CustomViewModel"
-    d:DataContext="{d:DesignInstance Type=viewmodel:CustomViewModel, IsDesignTimeCreatable=True}">
+    d:DataContext="{d:DesignInstance Type={x:Type viewmodel:CustomViewModel}, IsDesignTimeCreatable=True}">
 
 </window>
 ```
