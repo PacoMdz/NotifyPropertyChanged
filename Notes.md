@@ -10,7 +10,7 @@ Markup property
 DataContext Binding
 * **d:DataContext**="{d:DesignInstance **Type**=viewmodel:CustomViewModel, **IsDesignTimeCreatable**=True}"
 
-## XAML Example
+### XAML Example
 
 ```xml
 <window
@@ -26,4 +26,28 @@ DataContext Binding
     d:DataContext="{d:DesignInstance Type=viewmodel:CustomViewModel, IsDesignTimeCreatable=True}">
 
 </window>
+```
+
+# Microsoft WPF AppDomainUnhandledException
+
+```c#
+public partial class App : Application
+{
+    protected sealed override void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
+
+        #if !DEBUG
+        AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
+        #endif
+
+        var window = new Views.MainWindow();
+        window.Show();
+    }
+    
+    private static void AppDomainUnhandledException(object sender, UnhandledExceptionEventArgs ex)
+    {
+        // Handle Exception
+    }
+}
 ```
